@@ -1,8 +1,7 @@
 package com.company;
 
-import java.util.ArrayList;
 import com.google.gson.*;
-
+import org.bouncycastle.*;
 
 public class Main {
 
@@ -12,12 +11,12 @@ public class Main {
         chain.getChain().add(new Block("This is a brand new block 1", "0"));
 
         // build the chain with JSON
-        String chainJson = new GsonBuilder()
+        String decodedChain = new GsonBuilder()
             .setPrettyPrinting()
             .create()
             .toJson(chain);
 
-        System.out.println(chainJson);
+        System.out.println(decodedChain);
 
         chain.isValidChain();
 

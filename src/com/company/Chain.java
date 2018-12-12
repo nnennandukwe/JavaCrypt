@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Chain {
 
     private ArrayList<Block> chain;
-//    private Block block;
     private int complexity;
 
     // CONSTRUCTORS
@@ -50,6 +49,7 @@ public class Chain {
 
         Block currentBlock;
         Block prevBlock;
+        String hashTarget = new String(new char[complexity]).replace('\0','0');
 
         for(int i=1; i < chain.size(); i++){
             currentBlock = chain.get(i);
@@ -60,7 +60,12 @@ public class Chain {
                 return false;
             }
             if (!prevBlock.getHash().equals(prevBlock.genHash())) {
-                System.out.println("Invalid chain due to different PREVIOUS hashes.");
+                System.out.println("Invalid chain due to differing PREVIOUS hashes.");
+                return false;
+            }
+
+            if(!currentBlock.getHash().substring(0, complexity).equals(hashTarget)) {
+                System.out.println("WARNING!! BLOCK FAILED TO BE MINED.");
                 return false;
             }
         }
