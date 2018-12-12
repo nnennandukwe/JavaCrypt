@@ -5,12 +5,13 @@ import java.util.ArrayList;
 public class Chain {
 
     private ArrayList<Block> chain;
+//    private Block block;
     private int complexity;
 
     // CONSTRUCTORS
 
     Chain(){
-        this.chain = new ArrayList<Block>();
+        this.chain = new ArrayList<>();
         this.complexity = 1;
     }
 
@@ -40,6 +41,31 @@ public class Chain {
      */
     public ArrayList getChain(){
         return chain;
+    }
+
+
+    // FUNCTIONALITY METHODS
+
+    public Boolean isValidChain(){
+
+        Block currentBlock;
+        Block prevBlock;
+
+        for(int i=1; i < chain.size(); i++){
+            currentBlock = chain.get(i);
+            prevBlock = chain.get(i-1);
+
+            if (!currentBlock.getHash().equals(prevBlock.genHash())) {
+                System.out.println("Invalid chain due to differing CURRENT hashes.");
+                return false;
+            }
+            if (!prevBlock.getHash().equals(prevBlock.genHash())) {
+                System.out.println("Invalid chain due to different PREVIOUS hashes.");
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }
