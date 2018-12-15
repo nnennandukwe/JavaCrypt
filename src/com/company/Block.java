@@ -16,6 +16,7 @@ public class Block {
 		this.previousHash = previousHash;
         this.timeStamp = new Date().getTime();
         this.hash = genHash();
+        this.nonce = 0;
     }
 
     // ACCESSOR METHODS
@@ -36,10 +37,17 @@ public class Block {
 	    return timeStamp;
     }
 
+    public int getNonce(){
+        return nonce;
+    }
 
     // MUTATOR METHODS
     public void setData(String newData){
         data = newData;
+    }
+
+    public void setNonce(int newNonce){
+        nonce = newNonce;
     }
 
     // FUNCTIONALITY METHODS
